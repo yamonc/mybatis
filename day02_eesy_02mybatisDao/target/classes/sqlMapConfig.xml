@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置properties
+        可以在标签体内部配置连接数据库的信息，也可以通过属性引用外部配置信息
+        resource属性：
+            用户指定配置文件的位置，是按照类路径的写法来写，并且必须存在于类路径下
+        url属性
+              是要求按照url的写法来写地址
+              写法：
+                http：//localhost:8080/mybatisserver/demo1
+                协议 主机 端口 URI
+                uri:统一资源标识符在应用中可以唯一定位的一个资源
+
+    -->
+
+
+    <properties url="file:///G:/java_codes/day02_eesy_02mybatisDao/src/main/resources/jdbcConfig.properties">
+
+    </properties>
+    <!--配置环境-->
+    <environments default="mysql">
+        <!--配置mysql环境-->
+        <environment id="mysql">
+            <!--配置事务-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--配置连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!--配置映射文件位置-->
+    <mappers>
+        <mapper resource="com/itheima/dao/IUserDao.xml"></mapper>
+    </mappers>
+
+
+</configuration>

@@ -1,0 +1,1 @@
+每次启动都需要开启jedis服务器和客户端，具体位置为：F:\java_file\redis
