@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springmvc_day02_03_exception" />
+        <module name="springboot_mybatis" />
+        <module name="springboot_quick2" />
+        <module name="springmvc_day02_04_intercetor" />
+        <module name="springboot_quick2 (1)" />
+        <module name="fileuploadserver" />
+        <module name="springmvc_day03_03_fileupload" />
+        <module name="springboot_quick" />
+        <module name="ssm" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="springboot_quick2" target="1.5" />
+      <module name="springmvc_day02_02_fileupload" target="1.5" />
+      <module name="springmvc_day03_03_fileupload" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot_mybatis" options="-parameters" />
+      <module name="springboot_quick" options="-parameters" />
+      <module name="springboot_quick2 (1)" options="-parameters" />
+    </option>
+  </component>
+</project>
