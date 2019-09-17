@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用正则表达式校验数据</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style>
+        #form_1{
+            width: 50%;
+            text-align: center;
+            margin-top: 5px;
+            margin-left:25%;
+
+        }
+    </style>
+
+
+    <script>
+        //用户名的规则，第一个是字母，只有数字组成，并且6位
+        function checkName() {
+            //获取到用户名
+            var username=document.getElementById("username").value;
+            var userspan=document.getElementById("userId");
+
+            var regx=/^[a-z][a-z0-9]{5}$/i;
+            if (regx.test(username)){
+                userspan.innerHTML="正确".fontcolor("green");
+                return true;
+            }else{
+                userspan.innerHTML="错误".fontcolor("red");
+                return false;
+            }
+        }
+
+        /**
+         * 校验密码，一般为6位，全部为数字
+         */
+        function checkPass() {
+            var password=document.getElementById("password").value;
+            var regx=/^\w{6}$/;
+            if (password.length>0){
+                if (regx.test(password)){
+                    passId.innerHTML="正确".fontcolor("green");
+                    return true;
+                }else {
+                    passId.innerHTML="密码错误".fontcolor("red");
+                    return false;
+                }
+            }else{
+                passId.innerHTML="您没有输入密码，请输入".fontcolor("red");
+                return false;
+            }
+        }
+        
+        function ensurepass() {
+            var pass1=document.getElementById("password").value;
+            var pass2=document.getElementById("ensurepw").value;
+            if (pass2.length > 0 && pass1.length>0){
+                //都输入了密码。开始比较
+                if (pass1.valueOf()==pass2.valueOf()){
+                    ensure.innerHTML="正确".fontcolor("green");
+                    return true;
+                } else {
+                    ensure.innerHTML="错误".fontcolor("red");
+                    return false;
+                }
+            } else {
+                ensure.innerHTML="请输入密码".fontcolor("red");
+                return false;
+            }
+        }
+
+        /**
+         * email的基本格式：/^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;
+         *
+         */
+        function checkEmail() {
+            var email=document.getElementById("email").value;
+            var regx=/^[a-z0-9]\w+@[a-z0-9]{2,3}(\.[a-z]{2,3}){1,2}$/i;
+            var emailSpan=document.getElementById("emailspan");
+            if (regx.test(email)){
+                emailSpan.innerHTML="正确".fontcolor("green");
+                return true;
+            }else{
+                emailSpan.innerHTML="错误".fontcolor("red");
+                return false;
+            }
+
+        }
+
+        /**
+         * 检查爱好
+         * @returns {boolean}
+         */
+        function checkHobby() {
+            var likes=document.getElementById("like");
+            var hobyspan=document.getElementById("hobbyspan");
+            var flag=false;
+            for (var i = 0; i < likes.length; i++) {
+                if (likes[i].checked){
+                    flag=true;
+                    break;
+                }
+            }
+            if (flag){
+                hobyspan.innerHTML="正确".fontcolor("greed");
+                return true;
+            }else{
+                hobyspan.innerHTML="错误".fontcolor("red");
+                return false;
+            }
+        }
+
+        function checkForm() {
+            var userName=checkName();
+            var pass=checkPass();
+            var repass=ensurepass();
+            var email=checkEmail();
+            var hoby=checkHobby();
+            if (userName&&pass&&repass&&email&&hoby){
+                return true;
+            } else{
+                location.reload("https://www.baidu.com");
+                return false;
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="form_1">
+<form action="success.html" method="get" onsubmit="return checkForm()">
+    <table border="1px" width="50%" align="center" cellspacing="0px" cellpadding="3px" class="table table-hover">
+        <tr>
+            <td width="25%" align="center">姓名</td>
+            <td><input type="text" class="form-control" name="username"  id="username"  onblur="checkName()">
+                <span id="userId"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td>
+                <div data-toggle="tooltip" data-placement="right" title="请输入6位密码，必须含有英文">
+                    <input type="password" class="form-control" name="password" id="password" onblur="checkPass()">
+                </div>
+                <span id="passId"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td>
+                <input type="password" class="form-control" name="ensurepw" id="ensurepw" onblur="ensurepass()">
+                <span id="ensure"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>邮箱：</td>
+            <td>
+                <input type="text" class="form-control" name="email" id="email" onblur="checkEmail()">
+                <span id="emailspan"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                <input type="radio" checked="true" name="gender" id="male" value="male">男
+                <input type="radio" name="gender" value="female">女
+            </td>
+        </tr>
+        <tr>
+            <td>爱好</td>
+            <td>
+                <input type="checkbox" checked="checked" name="like">eat
+                <input type="checkbox" name="like">sleep
+                <input type="checkbox" name="like">play
+                <input type="checkbox" name="like">ddd
+                <span id="hobbyspan"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>城市</td>
+            <td >
+                <select class="btn dropdown-toggle" name="city" id="city">
+                    <option value="">请选择</option>
+                    <option value="bj">北京</option>
+                    <option value="gz">广州</option>
+                    <option value="tj">上海</option>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td>自我介绍</td>
+            <td>
+                <textarea class="form-control" cols="100" rows="20" name="info" id="info"></textarea>
+            </td>
+
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <button class="btn btn-primary text-primary" type="button" value="up">提交</button>
+            </td>
+        </tr>
+
+
+
+    </table>
+
+</form>
+</div>
+</body>
+</html>
